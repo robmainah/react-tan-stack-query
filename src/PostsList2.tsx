@@ -6,7 +6,7 @@ function PostsList2() {
     queryKey: ["posts"],
     // queryFn: () => Promise.reject("Error message"),
     queryFn: getPosts,
-    // refetchInterval: 1000
+    // refetchInterval: 1000, // refetch the data every 1 second
   })
 
   if (postsQuery.isLoading) return <h1>Loading.....</h1>
