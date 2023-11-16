@@ -7,9 +7,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const queryClient = new QueryClient(
   // keep the data as fresh for 5 minutes
-  // {
-  //   defaultOptions: { queries: { staleTime: 1000 * 60 * 5 } }
-  // }
+  {
+    defaultOptions: { queries: { staleTime: 1000 * 60 * 5 } }
+  }
 )
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

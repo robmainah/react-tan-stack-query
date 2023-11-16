@@ -1,16 +1,21 @@
 import axios from "axios";
+import { Post, User } from "../types";
 
 export const getPosts = () => {
   return axios.get("https://jsonplaceholder.typicode.com/todos").then(res => res.data)
-  // return [
-  //   { id: 1, title: 'Title 1' },
-  //   { id: 2, title: 'Title 2' },
-  // ]
 };
 
-export const getPost = (id: number) => {
+export const getPost = (id: number): Promise<Post> => {
   return axios.get(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res => res.data)
 };
-export const getUser = (id: number) => {
+
+export const getUser = (id: number): Promise<User> => {
   return axios.get(`https://jsonplaceholder.typicode.com/users/${id}`).then(res => res.data)
+};
+
+export const createPost = ({ title, body }: Post) => {
+  return axios.post("https://jsonplaceholder.typicode.com/todos", {
+    title,
+    body,
+  }).then(res => res.data)
 };

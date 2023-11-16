@@ -10,7 +10,7 @@ function Post({ id }: { id: number }) {
   const userQuery = useQuery({
     queryKey: ["users", postQuery.data?.userId],
     enabled: !!postQuery.data?.userId,
-    queryFn: () => getUser(postQuery.data?.userId),
+    queryFn: () => getUser(postQuery.data!.userId),
   })
 
   if (postQuery.isLoading) return <h1>Loading.....</h1>
@@ -21,12 +21,12 @@ function Post({ id }: { id: number }) {
 
   return <div>
     <h1>
-      {postQuery.data.title} <br />
+      {postQuery.data?.title} <br />
       <small>
-        {userQuery.isLoading ? "Loading User..." : userQuery.isError ? "Error Loading user" : userQuery.data.name}
+        {userQuery.isLoading ? "Loading User..." : userQuery.isError ? "Error Loading user" : userQuery.data?.name}
       </small>
     </h1>
-    <p>{postQuery.data.body}</p>
+    <p>{postQuery.data?.body}</p>
   </div>
 };
 
