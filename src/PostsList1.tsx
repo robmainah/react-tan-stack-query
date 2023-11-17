@@ -1,12 +1,23 @@
-import { useQuery } from "@tanstack/react-query"
-import { getPosts } from "./api/api"
+import { useQueries, useQuery } from "@tanstack/react-query"
+import { getPost, getPosts } from "./api/api"
 
 function PostsList1() {
   const postsQuery = useQuery({
     queryKey: ["posts"],
-    // queryFn: () => Promise.reject("Error message"),
     queryFn: getPosts,
   })
+
+  const queries = useQueries({
+    queries: (postsQuery.data ?? []).map(post => {
+      return {
+        queryKey: ["posts", post.id],
+        queryFn: () => getPost(post.id)
+      }
+    })
+  })
+
+  console.log(queries.map(q => q.data));
+
 
   if (postsQuery.isLoading) return <h1>Loading.....</h1>
 
