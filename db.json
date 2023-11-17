@@ -1,0 +1,37 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "sunt aut facere repellat provident",
+      "body": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "userId": 1
+    },
+    {
+      "title": "111",
+      "body": "1111",
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "title": "2 title",
+      "body": "xcxv ",
+      "userId": 1,
+      "id": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Leanne Graham",
+      "username": "Bret",
+      "email": "Sincere@april.biz"
+    }
+  ]
+}

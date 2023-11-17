@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import { Post as PostTypes } from "./types";
-import { createPost } from "./api/posts";
+import { createPost } from "./api/api";
 import Post from "./Post";
 
 export default function CreatePost({ setCurrentPage }) {
@@ -13,9 +13,9 @@ export default function CreatePost({ setCurrentPage }) {
   const createPostMutation = useMutation({
     mutationFn: createPost,
     onSuccess(data: PostTypes) {
-      queryClient.setQueriesData(["posts", data.id], data), // set data manually to cache
-        queryClient.invalidateQueries(["posts"], { exact: true })
-      // setCurrentPage(<Post id={data.id} />)
+      queryClient.setQueriesData(["posts", data.id], data) // set data manually to cache
+      queryClient.invalidateQueries(["posts"], { exact: true })
+      setCurrentPage(<Post id={data.id} />)
     },
   })
 
@@ -25,6 +25,7 @@ export default function CreatePost({ setCurrentPage }) {
     createPostMutation.mutate({
       title: titleRef.current?.value,
       body: bodyRef.current?.value,
+      userId: 1
     } as PostTypes)
   }
 
