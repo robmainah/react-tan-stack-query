@@ -7,6 +7,8 @@ function PostsList1() {
   const postsQuery = useQuery({
     queryKey: ["posts"],
     queryFn: getPosts,
+    // initialData: [{ id: 100, title: 'initial title' }],
+    placeholderData: [{ id: 100, title: 'initial title' }],
   })
 
   /*
