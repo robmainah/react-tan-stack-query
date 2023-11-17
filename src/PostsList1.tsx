@@ -1,23 +1,35 @@
-import { useQueries, useQuery } from "@tanstack/react-query"
+import { useQueries, useQuery, useQueryClient } from "@tanstack/react-query"
 import { getPost, getPosts } from "./api/api"
 
 function PostsList1() {
+  const queryClient = useQueryClient()
+
   const postsQuery = useQuery({
     queryKey: ["posts"],
     queryFn: getPosts,
   })
 
-  const queries = useQueries({
-    queries: (postsQuery.data ?? []).map(post => {
-      return {
-        queryKey: ["posts", post.id],
-        queryFn: () => getPost(post.id)
-      }
+  /*
+    // get bunch of ids at the same time   
+    const queries = useQueries({
+      queries: (postsQuery.data ?? []).map(post => {
+        return {
+          queryKey: ["posts", post.id],
+          queryFn: () => getPost(post.id)
+        }
+      })
     })
-  })
+  
+    console.log(queries.map(q => q.data)); */
 
-  console.log(queries.map(q => q.data));
+  const prefetchPost = () => {
+    queryClient.prefetchQuery({
+      queryKey: ["posts", 1],
+      queryFn: () => getPost(1),
+    })
+  }
 
+  prefetchPost()
 
   if (postsQuery.isLoading) return <h1>Loading.....</h1>
 
